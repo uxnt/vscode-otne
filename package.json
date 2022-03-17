@@ -3,7 +3,7 @@
 	"displayName": "Otne",
 	"description": "Otne Language",
 	"version": "0.0.3",
-	"icon": "./icons/otne.png",
+	"icon": "otne.png",
 	"author": "beanflame",
 	"publisher": "uxnt",
 	"engines": {
