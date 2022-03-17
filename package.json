@@ -16,6 +16,16 @@
 		"url": "https://github.com/uxnt/vscode-otne"
 	},
 	"contributes": {
+
+		"iconThemes": [
+			{
+				"id": "otne-icon-theme",
+				"label": "Otne Icon Theme",
+				"path": "./dist/otne-icons.json",
+				"_watch": true
+			}
+		],
+
 		"languages": [
 			{
 				"id": "otne",

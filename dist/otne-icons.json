@@ -1,0 +1,75 @@
+{
+  "iconDefinitions": {
+    "otne": {
+      "iconPath": "./../icons/file/otne.svg"
+    },
+    "folder-otne": {
+      "iconPath": "./../icons/folder/folder-otne.svg"
+    },
+    "folder-otne-open": {
+      "iconPath": "./../icons/folder/folder-otne-open.svg"
+    }
+  },
+  "folderNames": {
+    "otne": "folder-otne"
+  },
+  "folderNamesExpanded": {
+    "otne": "folder-otne-open"
+  },
+  "fileExtensions": {
+    "otne": "otne"
+  },
+  "fileNames": {
+    "otne": "otne",
+    "test.otne": "otne",
+    "otne.c": "otne"
+  },
+  "languageIds": {
+    "otne": "otne"
+  },
+  "light": {
+    "fileExtensions": {
+      "otne": "otne"
+    },
+    "fileNames": {
+      "otne": "otne",
+    "test.otne": "otne",
+    "otne.c": "otne"
+    },
+    "folderNames": {
+      "otne": "folder-otne"
+    },
+    "folderNamesExpanded": {
+      "otne": "folder-otne-open"
+    }
+  },
+  "highContrast": {
+    "fileExtensions": {},
+    "fileNames": {}
+  },
+  "options": {
+    "folders": {
+      "theme": "specific",
+      "color": "#90a4ae",
+      "associations": {}
+    },
+    "activeIconPack": "angular",
+    "hidesExplorerArrows": false,
+    "opacity": 1,
+    "saturation": 1,
+    "files": {
+      "associations": {}
+    },
+    "languages": {
+      "associations": {}
+    },
+    "showUpdateMessage": false,
+    "showWelcomeMessage": false
+  },
+  "file": "file",
+  "hidesExplorerArrows": false,
+  "folder": "folder",
+  "folderExpanded": "folder-open",
+  "rootFolder": "folder-root",
+  "rootFolderExpanded": "folder-root-open"
+}
