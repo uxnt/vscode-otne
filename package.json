@@ -3,16 +3,14 @@
 	"displayName": "Otne",
 	"description": "Otne Language",
 	"version": "0.0.3",
-	"icon": "otne.svg",
+	"icon": "./icons/otne.png",
 	"author": "beanflame",
 	"publisher": "uxnt",
 	"engines": {
 		"vscode": "^1.63.0"
 	},
 	"categories": [
-		"Programming Languages",
-		"otne",
-		"uxnt"
+		"Programming Languages"
 	],
 	"repository": {
 		"url": "https://github.com/uxnt/vscode-otne"
