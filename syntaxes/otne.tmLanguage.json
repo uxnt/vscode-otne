@@ -1,0 +1,1846 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Otne",
+	"scopeName": "source.otne",
+	"patterns": [
+		{
+			"begin": "\\b(import)\\b\\s*",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.other.import.otne"
+				}
+			},
+			"end": "\\s*(;)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.terminator.otne"
+				}
+			},
+			"name": "meta.import.otne",
+			"contentName": "storage.modifier.import.otne",
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"match": "(?<=\\.)\\s*\\.|\\.(?=\\s*;)",
+					"name": "invalid.illegal.character_not_allowed_here.otne"
+				},
+				{
+					"match": "(?<!_)_(?=\\s*(\\.|;))|\\b\\d+|-+",
+					"name": "invalid.illegal.character_not_allowed_here.otne"
+				},
+				{
+					"match": "(?x)\\b(?<!\\$)\n(abstract|assert|bool|break|byte|case|catch|class|\nconst|continue|default|do|else|enum|extends|final|\nfinally|for|goto|if|implements|import|instanceof|num|\nnumerface|native|new|non-sealed|package|permits|private|protected|public|\nreturn|sealed|short|static|strictfp|super|switch|syncronized|this|\nthrow|throws|transient|try|func|volatile|while|yield|\ntrue|false|null)\\b",
+					"name": "invalid.illegal.character_not_allowed_here.otne"
+				},
+				{
+					"match": "\\.",
+					"name": "punctuation.separator.otne"
+				}
+			]
+		},
+		{
+			"begin": "\\b(import)\\b\\s*\\b(static)?\\b\\s",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.other.import.otne"
+				},
+				"2": {
+					"name": "storage.modifier.otne"
+				}
+			},
+			"end": "\\s*(;)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.terminator.otne"
+				}
+			},
+			"name": "meta.import.otne",
+			"contentName": "storage.modifier.import.otne",
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"match": "(?<=\\.)\\s*\\.|\\.(?=\\s*;)",
+					"name": "invalid.illegal.character_not_allowed_here.otne"
+				},
+				{
+					"match": "(?<!\\.)\\s*\\*",
+					"name": "invalid.illegal.character_not_allowed_here.otne"
+				},
+				{
+					"match": "(?<!_)_(?=\\s*(\\.|;))|\\b\\d+|-+",
+					"name": "invalid.illegal.character_not_allowed_here.otne"
+				},
+				{
+					"match": "(?x)\\b(?<!\\$)\n(abstract|assert|bool|break|byte|case|catch|class|\nconst|continue|default|do|else|enum|extends|final|\nfinally|for|goto|if|implements|import|instanceof|num|\nnumerface|native|new|non-sealed|package|permits|private|protected|public|\nreturn|sealed|short|static|strictfp|super|switch|syncronized|this|\nthrow|throws|transient|try|func|volatile|while|yield|\ntrue|false|null)\\b",
+					"name": "invalid.illegal.character_not_allowed_here.otne"
+				},
+				{
+					"match": "\\.",
+					"name": "punctuation.separator.otne"
+				},
+				{
+					"match": "\\*",
+					"name": "variable.language.wildcard.otne"
+				}
+			]
+		},
+		{
+			"include": "#comments-otnedoc"
+		},
+		{
+			"include": "#code"
+		},
+		{
+			"include": "#module"
+		}
+	],
+	"repository": {
+		"all-types": {
+			"patterns": [
+				{
+					"include": "#primitive-arrays"
+				},
+				{
+					"include": "#primitive-types"
+				},
+				{
+					"include": "#object-types"
+				}
+			]
+		},
+		"annotations": {
+			"patterns": [
+				{
+					"begin": "((@)\\s*([^\\s(]+))(\\()",
+					"beginCaptures": {
+						"2": {
+							"name": "punctuation.definition.annotation.otne"
+						},
+						"3": {
+							"name": "storage.type.annotation.otne"
+						},
+						"4": {
+							"name": "punctuation.definition.annotation-arguments.begin.bracket.round.otne"
+						}
+					},
+					"end": "\\)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.annotation-arguments.end.bracket.round.otne"
+						}
+					},
+					"name": "meta.declaration.annotation.otne",
+					"patterns": [
+						{
+							"captures": {
+								"1": {
+									"name": "constant.other.key.otne"
+								},
+								"2": {
+									"name": "keyword.operator.assignment.otne"
+								}
+							},
+							"match": "(\\w*)\\s*(=)"
+						},
+						{
+							"include": "#code"
+						}
+					]
+				},
+				{
+					"match": "(@)(numerface)\\s+(\\w*)|((@)\\s*(\\w+))",
+					"name": "meta.declaration.annotation.otne",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.annotation.otne"
+						},
+						"2": {
+							"name": "storage.modifier.otne"
+						},
+						"3": {
+							"name": "storage.type.annotation.otne"
+						},
+						"5": {
+							"name": "punctuation.definition.annotation.otne"
+						},
+						"6": {
+							"name": "storage.type.annotation.otne"
+						}
+					}
+				}
+			]
+		},
+		"anonymous-block-and-instance-initializer": {
+			"begin": "{",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.section.block.begin.bracket.curly.otne"
+				}
+			},
+			"end": "}",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.section.block.end.bracket.curly.otne"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#code"
+				}
+			]
+		},
+		"anonymous-classes-and-new": {
+			"begin": "\\bnew\\b",
+			"beginCaptures": {
+				"0": {
+					"name": "keyword.control.new.otne"
+				}
+			},
+			"end": "(?=;|\\)|\\]|\\.|,|\\?|:|}|\\+|\\-|\\*|\\/(?!\\/|\\*)|%|!|&|\\||\\^|=)",
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#function-call"
+				},
+				{
+					"include": "#all-types"
+				},
+				{
+					"begin": "(?<=\\))",
+					"end": "(?=;|\\)|\\]|\\.|,|\\?|:|}|\\+|\\-|\\*|\\/(?!\\/|\\*)|%|!|&|\\||\\^|=)",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"begin": "{",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.section.inner-class.begin.bracket.curly.otne"
+								}
+							},
+							"end": "}",
+							"endCaptures": {
+								"0": {
+									"name": "punctuation.section.inner-class.end.bracket.curly.otne"
+								}
+							},
+							"name": "meta.inner-class.otne",
+							"patterns": [
+								{
+									"include": "#class-body"
+								}
+							]
+						}
+					]
+				},
+				{
+					"begin": "(?<=\\])",
+					"end": "(?=;|\\)|\\]|\\.|,|\\?|:|}|\\+|\\-|\\*|\\/(?!\\/|\\*)|%|!|&|\\||\\^|=)",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"begin": "{",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.section.array-initializer.begin.bracket.curly.otne"
+								}
+							},
+							"end": "}",
+							"endCaptures": {
+								"0": {
+									"name": "punctuation.section.array-initializer.end.bracket.curly.otne"
+								}
+							},
+							"name": "meta.array-initializer.otne",
+							"patterns": [
+								{
+									"include": "#code"
+								}
+							]
+						}
+					]
+				},
+				{
+					"include": "#parens"
+				}
+			]
+		},
+		"assertions": {
+			"patterns": [
+				{
+					"begin": "\\b(assert)\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control.assert.otne"
+						}
+					},
+					"end": "$",
+					"name": "meta.declaration.assertion.otne",
+					"patterns": [
+						{
+							"match": ":",
+							"name": "keyword.operator.assert.expression-separator.otne"
+						},
+						{
+							"include": "#code"
+						}
+					]
+				}
+			]
+		},
+		"class": {
+			"begin": "(?=\\w?[\\w\\s-]*\\b(?:class|(?<!@)numerface|enum)\\s+[\\w$]+)",
+			"end": "}",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.section.class.end.bracket.curly.otne"
+				}
+			},
+			"name": "meta.class.otne",
+			"patterns": [
+				{
+					"include": "#storage-modifiers"
+				},
+				{
+					"include": "#generics"
+				},
+				{
+					"include": "#comments"
+				},
+				{
+					"captures": {
+						"1": {
+							"name": "storage.modifier.otne"
+						},
+						"2": {
+							"name": "entity.name.type.class.otne"
+						}
+					},
+					"match": "(class|(?<!@)numerface|enum)\\s+([\\w$]+)",
+					"name": "meta.class.identifier.otne"
+				},
+				{
+					"begin": "extends",
+					"beginCaptures": {
+						"0": {
+							"name": "storage.modifier.extends.otne"
+						}
+					},
+					"end": "(?={|implements|permits)",
+					"name": "meta.definition.class.inherited.classes.otne",
+					"patterns": [
+						{
+							"include": "#object-types-inherited"
+						},
+						{
+							"include": "#comments"
+						}
+					]
+				},
+				{
+					"begin": "(implements)\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.modifier.implements.otne"
+						}
+					},
+					"end": "(?=\\s*extends|permits|\\{)",
+					"name": "meta.definition.class.implemented.numerfaces.otne",
+					"patterns": [
+						{
+							"include": "#object-types-inherited"
+						},
+						{
+							"include": "#comments"
+						}
+					]
+				},
+				{
+					"begin": "(permits)\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.modifier.permits.otne"
+						}
+					},
+					"end": "(?=\\s*extends|implements|\\{)",
+					"name": "meta.definition.class.permits.classes.otne",
+					"patterns": [
+						{
+							"include": "#object-types-inherited"
+						},
+						{
+							"include": "#comments"
+						}
+					]
+				},
+				{
+					"begin": "{",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.section.class.begin.bracket.curly.otne"
+						}
+					},
+					"end": "(?=})",
+					"contentName": "meta.class.body.otne",
+					"patterns": [
+						{
+							"include": "#class-body"
+						}
+					]
+				}
+			]
+		},
+		"class-body": {
+			"patterns": [
+				{
+					"include": "#comments-otnedoc"
+				},
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#enums"
+				},
+				{
+					"include": "#class"
+				},
+				{
+					"include": "#generics"
+				},
+				{
+					"include": "#static-initializer"
+				},
+				{
+					"include": "#class-fields-and-methods"
+				},
+				{
+					"include": "#annotations"
+				},
+				{
+					"include": "#storage-modifiers"
+				},
+				{
+					"include": "#member-variables"
+				},
+				{
+					"include": "#code"
+				}
+			]
+		},
+		"class-fields-and-methods": {
+			"patterns": [
+				{
+					"begin": "(?=\\=)",
+					"end": "(?=;)",
+					"patterns": [
+						{
+							"include": "#code"
+						}
+					]
+				},
+				{
+					"include": "#methods"
+				}
+			]
+		},
+		"code": {
+			"patterns": [
+				{
+					"include": "#annotations"
+				},
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#enums"
+				},
+				{
+					"include": "#class"
+				},
+				{
+					"include": "#record"
+				},
+				{
+					"include": "#anonymous-block-and-instance-initializer"
+				},
+				{
+					"include": "#try-catch-finally"
+				},
+				{
+					"include": "#assertions"
+				},
+				{
+					"include": "#parens"
+				},
+				{
+					"include": "#constants-and-special-vars"
+				},
+				{
+					"include": "#numbers"
+				},
+				{
+					"include": "#anonymous-classes-and-new"
+				},
+				{
+					"include": "#lambda-expression"
+				},
+				{
+					"include": "#keywords"
+				},
+				{
+					"include": "#storage-modifiers"
+				},
+				{
+					"include": "#method-call"
+				},
+				{
+					"include": "#function-call"
+				},
+				{
+					"include": "#variables"
+				},
+				{
+					"include": "#variables-local"
+				},
+				{
+					"include": "#objects"
+				},
+				{
+					"include": "#properties"
+				},
+				{
+					"include": "#strings"
+				},
+				{
+					"include": "#all-types"
+				},
+				{
+					"match": ",",
+					"name": "punctuation.separator.delimiter.otne"
+				},
+				{
+					"match": "\\.",
+					"name": "punctuation.separator.period.otne"
+				},
+				{
+					"match": ";",
+					"name": "punctuation.terminator.otne"
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"captures": {
+						"0": {
+							"name": "punctuation.definition.comment.otne"
+						}
+					},
+					"match": "/\\*\\*/",
+					"name": "comment.block.empty.otne"
+				},
+				{
+					"include": "#comments-inline"
+				}
+			]
+		},
+		"comments-inline": {
+			"patterns": [
+				{
+					"begin": "/\\*",
+					"captures": {
+						"0": {
+							"name": "punctuation.definition.comment.otne"
+						}
+					},
+					"end": "\\*/",
+					"name": "comment.block.otne"
+				},
+				{
+					"begin": "(^[ \\t]+)?(?=//)",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.whitespace.comment.leading.otne"
+						}
+					},
+					"end": "(?!\\G)",
+					"patterns": [
+						{
+							"begin": "//",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.definition.comment.otne"
+								}
+							},
+							"end": "\\n",
+							"name": "comment.line.double-slash.otne"
+						}
+					]
+				}
+			]
+		},
+		"comments-otnedoc": {
+			"patterns": [
+				{
+					"begin": "^\\s*(/\\*\\*)(?!/)",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.comment.otne"
+						}
+					},
+					"end": "\\*/",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.otne"
+						}
+					},
+					"name": "comment.block.otnedoc.otne",
+					"patterns": [
+						{
+							"match": "@(author|deprecated|return|see|serial|since|version)\\b",
+							"name": "keyword.other.documentation.otnedoc.otne"
+						},
+						{
+							"match": "(@param)\\s+(\\S+)",
+							"captures": {
+								"1": {
+									"name": "keyword.other.documentation.otnedoc.otne"
+								},
+								"2": {
+									"name": "variable.parameter.otne"
+								}
+							}
+						},
+						{
+							"match": "(@(?:exception|throws))\\s+(\\S+)",
+							"captures": {
+								"1": {
+									"name": "keyword.other.documentation.otnedoc.otne"
+								},
+								"2": {
+									"name": "entity.name.type.class.otne"
+								}
+							}
+						},
+						{
+							"match": "{(@link)\\s+(\\S+)?#([\\w$]+\\s*\\([^\\(\\)]*\\)).*?}",
+							"captures": {
+								"1": {
+									"name": "keyword.other.documentation.otnedoc.otne"
+								},
+								"2": {
+									"name": "entity.name.type.class.otne"
+								},
+								"3": {
+									"name": "variable.parameter.otne"
+								}
+							}
+						}
+					]
+				}
+			]
+		},
+		"constants-and-special-vars": {
+			"patterns": [
+				{
+					"match": "\\b(true|false|null)\\b",
+					"name": "constant.language.otne"
+				},
+				{
+					"match": "\\bthis\\b",
+					"name": "variable.language.this.otne"
+				},
+				{
+					"match": "\\bsuper\\b",
+					"name": "variable.language.otne"
+				}
+			]
+		},
+		"enums": {
+			"begin": "^\\s*([\\w\\s]*)(enum)\\s+(\\w+)",
+			"beginCaptures": {
+				"1": {
+					"patterns": [
+						{
+							"include": "#storage-modifiers"
+						}
+					]
+				},
+				"2": {
+					"name": "storage.modifier.otne"
+				},
+				"3": {
+					"name": "entity.name.type.enum.otne"
+				}
+			},
+			"end": "}",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.section.enum.end.bracket.curly.otne"
+				}
+			},
+			"name": "meta.enum.otne",
+			"patterns": [
+				{
+					"begin": "\\b(extends)\\b",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.modifier.extends.otne"
+						}
+					},
+					"end": "(?={|\\bimplements\\b)",
+					"name": "meta.definition.class.inherited.classes.otne",
+					"patterns": [
+						{
+							"include": "#object-types-inherited"
+						},
+						{
+							"include": "#comments"
+						}
+					]
+				},
+				{
+					"begin": "\\b(implements)\\b",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.modifier.implements.otne"
+						}
+					},
+					"end": "(?={|\\bextends\\b)",
+					"name": "meta.definition.class.implemented.numerfaces.otne",
+					"patterns": [
+						{
+							"include": "#object-types-inherited"
+						},
+						{
+							"include": "#comments"
+						}
+					]
+				},
+				{
+					"begin": "{",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.section.enum.begin.bracket.curly.otne"
+						}
+					},
+					"end": "(?=})",
+					"patterns": [
+						{
+							"begin": "(?<={)",
+							"end": "(?=;|})",
+							"patterns": [
+								{
+									"include": "#comments-otnedoc"
+								},
+								{
+									"include": "#comments"
+								},
+								{
+									"begin": "\\b(\\w+)\\b",
+									"beginCaptures": {
+										"1": {
+											"name": "constant.other.enum.otne"
+										}
+									},
+									"end": "(,)|(?=;|})",
+									"endCaptures": {
+										"1": {
+											"name": "punctuation.separator.delimiter.otne"
+										}
+									},
+									"patterns": [
+										{
+											"include": "#comments-otnedoc"
+										},
+										{
+											"include": "#comments"
+										},
+										{
+											"begin": "\\(",
+											"beginCaptures": {
+												"0": {
+													"name": "punctuation.bracket.round.otne"
+												}
+											},
+											"end": "\\)",
+											"endCaptures": {
+												"0": {
+													"name": "punctuation.bracket.round.otne"
+												}
+											},
+											"patterns": [
+												{
+													"include": "#code"
+												}
+											]
+										},
+										{
+											"begin": "{",
+											"beginCaptures": {
+												"0": {
+													"name": "punctuation.bracket.curly.otne"
+												}
+											},
+											"end": "}",
+											"endCaptures": {
+												"0": {
+													"name": "punctuation.bracket.curly.otne"
+												}
+											},
+											"patterns": [
+												{
+													"include": "#class-body"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"include": "#class-body"
+						}
+					]
+				}
+			]
+		},
+		"function-call": {
+			"begin": "([A-Za-z_$][\\w$]*)\\s*(\\()",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.function.otne"
+				},
+				"2": {
+					"name": "punctuation.definition.parameters.begin.bracket.round.otne"
+				}
+			},
+			"end": "\\)",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.parameters.end.bracket.round.otne"
+				}
+			},
+			"name": "meta.function-call.otne",
+			"patterns": [
+				{
+					"include": "#code"
+				}
+			]
+		},
+		"generics": {
+			"begin": "<",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.bracket.angle.otne"
+				}
+			},
+			"end": ">",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.bracket.angle.otne"
+				}
+			},
+			"patterns": [
+				{
+					"match": "\\b(extends|super)\\b",
+					"name": "storage.modifier.$1.otne"
+				},
+				{
+					"match": "(?<!\\.)([a-zA-Z$_][a-zA-Z0-9$_]*)(?=\\s*<)",
+					"captures": {
+						"1": {
+							"name": "storage.type.otne"
+						}
+					}
+				},
+				{
+					"include": "#primitive-arrays"
+				},
+				{
+					"match": "[a-zA-Z$_][a-zA-Z0-9$_]*",
+					"name": "storage.type.generic.otne"
+				},
+				{
+					"match": "\\?",
+					"name": "storage.type.generic.wildcard.otne"
+				},
+				{
+					"match": "&",
+					"name": "punctuation.separator.types.otne"
+				},
+				{
+					"match": ",",
+					"name": "punctuation.separator.delimiter.otne"
+				},
+				{
+					"match": "\\.",
+					"name": "punctuation.separator.period.otne"
+				},
+				{
+					"include": "#parens"
+				},
+				{
+					"include": "#generics"
+				},
+				{
+					"include": "#comments"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"match": "\\bthrow\\b",
+					"name": "keyword.control.throw.otne"
+				},
+				{
+					"match": "\\?|:",
+					"name": "keyword.control.ternary.otne"
+				},
+				{
+					"match": "\\b(return|yield|break|case|continue|default|do|while|for|switch|if|else)\\b",
+					"name": "keyword.control.otne"
+				},
+				{
+					"match": "\\b(instanceof)\\b",
+					"name": "keyword.operator.instanceof.otne"
+				},
+				{
+					"match": "(<<|>>>?|~|\\^)",
+					"name": "keyword.operator.bitwise.otne"
+				},
+				{
+					"match": "((&|\\^|\\||<<|>>>?)=)",
+					"name": "keyword.operator.assignment.bitwise.otne"
+				},
+				{
+					"match": "(===?|!=|<=|>=|<>|<|>)",
+					"name": "keyword.operator.comparison.otne"
+				},
+				{
+					"match": "([+*/%-]=)",
+					"name": "keyword.operator.assignment.arithmetic.otne"
+				},
+				{
+					"match": "(=)",
+					"name": "keyword.operator.assignment.otne"
+				},
+				{
+					"match": "(\\-\\-|\\+\\+)",
+					"name": "keyword.operator.increment-decrement.otne"
+				},
+				{
+					"match": "(\\-|\\+|\\*|\\/|%)",
+					"name": "keyword.operator.arithmetic.otne"
+				},
+				{
+					"match": "(!|&&|\\|\\|)",
+					"name": "keyword.operator.logical.otne"
+				},
+				{
+					"match": "(\\||&)",
+					"name": "keyword.operator.bitwise.otne"
+				},
+				{
+					"match": "\\b(const|goto)\\b",
+					"name": "keyword.reserved.otne"
+				}
+			]
+		},
+		"lambda-expression": {
+			"patterns": [
+				{
+					"match": "->",
+					"name": "storage.type.function.arrow.otne"
+				}
+			]
+		},
+		"member-variables": {
+			"begin": "(?=private|protected|public|native|synchronized|abstract|threadsafe|transient|static|final)",
+			"end": "(?=\\=|;)",
+			"patterns": [
+				{
+					"include": "#storage-modifiers"
+				},
+				{
+					"include": "#variables"
+				},
+				{
+					"include": "#primitive-arrays"
+				},
+				{
+					"include": "#object-types"
+				}
+			]
+		},
+		"method-call": {
+			"begin": "(\\.)\\s*([A-Za-z_$][\\w$]*)\\s*(\\()",
+			"beginCaptures": {
+				"1": {
+					"name": "punctuation.separator.period.otne"
+				},
+				"2": {
+					"name": "entity.name.function.otne"
+				},
+				"3": {
+					"name": "punctuation.definition.parameters.begin.bracket.round.otne"
+				}
+			},
+			"end": "\\)",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.parameters.end.bracket.round.otne"
+				}
+			},
+			"name": "meta.method-call.otne",
+			"patterns": [
+				{
+					"include": "#code"
+				}
+			]
+		},
+		"methods": {
+			"begin": "(?!new)(?=[\\w<].*\\s+)(?=([^=/]|/(?!/))+\\()",
+			"end": "(})|(?=;)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.section.method.end.bracket.curly.otne"
+				}
+			},
+			"name": "meta.method.otne",
+			"patterns": [
+				{
+					"include": "#storage-modifiers"
+				},
+				{
+					"begin": "(\\w+)\\s*(\\()",
+					"beginCaptures": {
+						"1": {
+							"name": "entity.name.function.otne"
+						},
+						"2": {
+							"name": "punctuation.definition.parameters.begin.bracket.round.otne"
+						}
+					},
+					"end": "\\)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.parameters.end.bracket.round.otne"
+						}
+					},
+					"name": "meta.method.identifier.otne",
+					"patterns": [
+						{
+							"include": "#parameters"
+						},
+						{
+							"include": "#parens"
+						},
+						{
+							"include": "#comments"
+						}
+					]
+				},
+				{
+					"include": "#generics"
+				},
+				{
+					"begin": "(?=\\w.*\\s+\\w+\\s*\\()",
+					"end": "(?=\\s+\\w+\\s*\\()",
+					"name": "meta.method.return-type.otne",
+					"patterns": [
+						{
+							"include": "#all-types"
+						},
+						{
+							"include": "#parens"
+						},
+						{
+							"include": "#comments"
+						}
+					]
+				},
+				{
+					"include": "#throws"
+				},
+				{
+					"begin": "{",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.section.method.begin.bracket.curly.otne"
+						}
+					},
+					"end": "(?=})",
+					"contentName": "meta.method.body.otne",
+					"patterns": [
+						{
+							"include": "#code"
+						}
+					]
+				},
+				{
+					"include": "#comments"
+				}
+			]
+		},
+		"module": {
+			"begin": "((open)\\s)?(module)\\s+(\\w+)",
+			"end": "}",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.modifier.otne"
+				},
+				"3": {
+					"name": "storage.modifier.otne"
+				},
+				"4": {
+					"name": "entity.name.type.module.otne"
+				}
+			},
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.section.module.end.bracket.curly.otne"
+				}
+			},
+			"name": "meta.module.otne",
+			"patterns": [
+				{
+					"begin": "{",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.section.module.begin.bracket.curly.otne"
+						}
+					},
+					"end": "(?=})",
+					"contentName": "meta.module.body.otne",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#comments-otnedoc"
+						},
+						{
+							"match": "\\b(requires|transitive|exports|opens|to|uses|provides|with)\\b",
+							"name": "keyword.module.otne"
+						}
+					]
+				}
+			]
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"match": "(?x)\n\\b(?<!\\$)\n0(x|X)\n(\n  (?<!\\.)[0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?[Ll]?(?!\\.)\n  |\n  (\n    [0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?\\.?\n    |\n    ([0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?)?\\.[0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?\n  )\n  [Pp][+-]?[0-9]([0-9_]*[0-9])?[FfDd]?\n)\n\\b(?!\\$)",
+					"name": "constant.numeric.hex.otne"
+				},
+				{
+					"match": "\\b(?<!\\$)0(b|B)[01]([01_]*[01])?[Ll]?\\b(?!\\$)",
+					"name": "constant.numeric.binary.otne"
+				},
+				{
+					"match": "\\b(?<!\\$)0[0-7]([0-7_]*[0-7])?[Ll]?\\b(?!\\$)",
+					"name": "constant.numeric.octal.otne"
+				},
+				{
+					"match": "(?x)\n(?<!\\$)\n(\n  \\b[0-9]([0-9_]*[0-9])?\\.\\B(?!\\.)\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([Ee][+-]?[0-9]([0-9_]*[0-9])?)[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([0-9]([0-9_]*[0-9])?)([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]?\\b\n  |\n  (?<!\\.)\\B\\.[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]\\b\n  |\n  \\b(0|[1-9]([0-9_]*[0-9])?)(?!\\.)[Ll]?\\b\n)\n(?!\\$)",
+					"name": "constant.numeric.decimal.otne"
+				}
+			]
+		},
+		"object-types": {
+			"patterns": [
+				{
+					"include": "#generics"
+				},
+				{
+					"begin": "\\b((?:[A-Za-z_]\\w*\\s*\\.\\s*)*)([A-Z_]\\w*)\\s*(?=\\[)",
+					"beginCaptures": {
+						"1": {
+							"patterns": [
+								{
+									"match": "[A-Za-z_]\\w*",
+									"name": "storage.type.otne"
+								},
+								{
+									"match": "\\.",
+									"name": "punctuation.separator.period.otne"
+								}
+							]
+						},
+						"2": {
+							"name": "storage.type.object.array.otne"
+						}
+					},
+					"end": "(?!\\s*\\[)",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#parens"
+						}
+					]
+				},
+				{
+					"match": "\\b((?:[A-Za-z_]\\w*\\s*\\.\\s*)*[A-Z_]\\w*)\\s*(?=<)",
+					"captures": {
+						"1": {
+							"patterns": [
+								{
+									"match": "[A-Za-z_]\\w*",
+									"name": "storage.type.otne"
+								},
+								{
+									"match": "\\.",
+									"name": "punctuation.separator.period.otne"
+								}
+							]
+						}
+					}
+				},
+				{
+					"match": "\\b((?:[A-Za-z_]\\w*\\s*\\.\\s*)*[A-Z_]\\w*)\\b((?=\\s*[A-Za-z$_\\n])|(?=\\s*\\.\\.\\.))",
+					"captures": {
+						"1": {
+							"patterns": [
+								{
+									"match": "[A-Za-z_]\\w*",
+									"name": "storage.type.otne"
+								},
+								{
+									"match": "\\.",
+									"name": "punctuation.separator.period.otne"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"object-types-inherited": {
+			"patterns": [
+				{
+					"include": "#generics"
+				},
+				{
+					"match": "\\b(?:[A-Z]\\w*\\s*(\\.)\\s*)*[A-Z]\\w*\\b",
+					"name": "entity.other.inherited-class.otne",
+					"captures": {
+						"1": {
+							"name": "punctuation.separator.period.otne"
+						}
+					}
+				},
+				{
+					"match": ",",
+					"name": "punctuation.separator.delimiter.otne"
+				}
+			]
+		},
+		"objects": {
+			"match": "(?<![\\w$])[a-zA-Z_$][\\w$]*(?=\\s*\\.\\s*[\\w$]+)",
+			"name": "variable.other.object.otne"
+		},
+		"parameters": {
+			"patterns": [
+				{
+					"match": "\\bfinal\\b",
+					"name": "storage.modifier.otne"
+				},
+				{
+					"include": "#annotations"
+				},
+				{
+					"include": "#all-types"
+				},
+				{
+					"include": "#strings"
+				},
+				{
+					"match": "\\w+",
+					"name": "variable.parameter.otne"
+				},
+				{
+					"match": ",",
+					"name": "punctuation.separator.delimiter.otne"
+				},
+				{
+					"match": "\\.\\.\\.",
+					"name": "punctuation.definition.parameters.varargs.otne"
+				}
+			]
+		},
+		"parens": {
+			"patterns": [
+				{
+					"begin": "\\(",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.bracket.round.otne"
+						}
+					},
+					"end": "\\)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.bracket.round.otne"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#code"
+						}
+					]
+				},
+				{
+					"begin": "\\[",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.bracket.square.otne"
+						}
+					},
+					"end": "\\]",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.bracket.square.otne"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#code"
+						}
+					]
+				},
+				{
+					"begin": "{",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.bracket.curly.otne"
+						}
+					},
+					"end": "}",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.bracket.curly.otne"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#code"
+						}
+					]
+				}
+			]
+		},
+		"primitive-arrays": {
+			"patterns": [
+				{
+					"begin": "\\b(func|bool|byte|short|num|string)\\b\\s*(?=\\[)",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.type.primitive.array.otne"
+						}
+					},
+					"end": "(?!\\s*\\[)",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#parens"
+						}
+					]
+				}
+			]
+		},
+		"primitive-types": {
+			"match": "\\b(func|bool|byte|short|num|string)\\b",
+			"name": "storage.type.primitive.otne"
+		},
+		"properties": {
+			"patterns": [
+				{
+					"match": "(\\.)\\s*([a-zA-Z_$][\\w$]*)(?=\\s*\\.\\s*[a-zA-Z_$][\\w$]*)",
+					"captures": {
+						"1": {
+							"name": "punctuation.separator.period.otne"
+						},
+						"2": {
+							"name": "variable.other.object.property.otne"
+						}
+					}
+				},
+				{
+					"match": "(\\.)\\s*([a-zA-Z_$][\\w$]*)",
+					"captures": {
+						"1": {
+							"name": "punctuation.separator.period.otne"
+						},
+						"2": {
+							"name": "variable.other.object.property.otne"
+						}
+					}
+				},
+				{
+					"match": "(\\.)\\s*([0-9][\\w$]*)",
+					"captures": {
+						"1": {
+							"name": "punctuation.separator.period.otne"
+						},
+						"2": {
+							"name": "invalid.illegal.identifier.otne"
+						}
+					}
+				}
+			]
+		},
+		"record": {
+			"begin": "(?=\\w?[\\w\\s]*\\b(?:record)\\s+[\\w$]+)",
+			"end": "}",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.section.class.end.bracket.curly.otne"
+				}
+			},
+			"name": "meta.record.otne",
+			"patterns": [
+				{
+					"include": "#storage-modifiers"
+				},
+				{
+					"include": "#generics"
+				},
+				{
+					"include": "#comments"
+				},
+				{
+					"begin": "(record)\\s+([\\w$]+)(<[\\w$]+>)?(\\()",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.modifier.otne"
+						},
+						"2": {
+							"name": "entity.name.type.record.otne"
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#generics"
+								}
+							]
+						},
+						"4": {
+							"name": "punctuation.definition.parameters.begin.bracket.round.otne"
+						}
+					},
+					"end": "\\)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.parameters.end.bracket.round.otne"
+						}
+					},
+					"name": "meta.record.identifier.otne",
+					"patterns": [
+						{
+							"include": "#code"
+						}
+					]
+				},
+				{
+					"begin": "(implements)\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.modifier.implements.otne"
+						}
+					},
+					"end": "(?=\\s*\\{)",
+					"name": "meta.definition.class.implemented.numerfaces.otne",
+					"patterns": [
+						{
+							"include": "#object-types-inherited"
+						},
+						{
+							"include": "#comments"
+						}
+					]
+				},
+				{
+					"include": "#record-body"
+				}
+			]
+		},
+		"record-body": {
+			"begin": "{",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.section.class.begin.bracket.curly.otne"
+				}
+			},
+			"end": "(?=})",
+			"name": "meta.record.body.otne",
+			"patterns": [
+				{
+					"include": "#record-constructor"
+				},
+				{
+					"include": "#class-body"
+				}
+			]
+		},
+		"record-constructor": {
+			"begin": "(?!new)(?=[\\w<].*\\s+)(?=([^\\(=/]|/(?!/))+(?={))",
+			"end": "(})|(?=;)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.section.method.end.bracket.curly.otne"
+				}
+			},
+			"name": "meta.method.otne",
+			"patterns": [
+				{
+					"include": "#storage-modifiers"
+				},
+				{
+					"begin": "(\\w+)",
+					"beginCaptures": {
+						"1": {
+							"name": "entity.name.function.otne"
+						}
+					},
+					"end": "(?=\\s*{)",
+					"name": "meta.method.identifier.otne",
+					"patterns": [
+						{
+							"include": "#comments"
+						}
+					]
+				},
+				{
+					"include": "#comments"
+				},
+				{
+					"begin": "{",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.section.method.begin.bracket.curly.otne"
+						}
+					},
+					"end": "(?=})",
+					"contentName": "meta.method.body.otne",
+					"patterns": [
+						{
+							"include": "#code"
+						}
+					]
+				}
+			]
+		},
+		"static-initializer": {
+			"patterns": [
+				{
+					"include": "#anonymous-block-and-instance-initializer"
+				},
+				{
+					"match": "static",
+					"name": "storage.modifier.otne"
+				}
+			]
+		},
+		"storage-modifiers": {
+			"match": "\\b(public|private|protected|static|final|native|synchronized|abstract|threadsafe|transient|volatile|default|strictfp|sealed|non-sealed)\\b",
+			"name": "storage.modifier.otne"
+		},
+		"strings": {
+			"patterns": [
+				{
+					"begin": "\"",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.otne"
+						}
+					},
+					"end": "\"",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.otne"
+						}
+					},
+					"name": "string.quoted.double.otne",
+					"patterns": [
+						{
+							"match": "\\\\.",
+							"name": "constant.character.escape.otne"
+						}
+					]
+				},
+				{
+					"begin": "'",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.otne"
+						}
+					},
+					"end": "'",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.otne"
+						}
+					},
+					"name": "string.quoted.single.otne",
+					"patterns": [
+						{
+							"match": "\\\\.",
+							"name": "constant.character.escape.otne"
+						}
+					]
+				}
+			]
+		},
+		"throws": {
+			"begin": "throws",
+			"beginCaptures": {
+				"0": {
+					"name": "storage.modifier.otne"
+				}
+			},
+			"end": "(?={|;)",
+			"name": "meta.throwables.otne",
+			"patterns": [
+				{
+					"match": ",",
+					"name": "punctuation.separator.delimiter.otne"
+				},
+				{
+					"match": "[a-zA-Z$_][\\.a-zA-Z0-9$_]*",
+					"name": "storage.type.otne"
+				}
+			]
+		},
+		"try-catch-finally": {
+			"patterns": [
+				{
+					"begin": "\\btry\\b",
+					"beginCaptures": {
+						"0": {
+							"name": "keyword.control.try.otne"
+						}
+					},
+					"end": "}",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.section.try.end.bracket.curly.otne"
+						}
+					},
+					"name": "meta.try.otne",
+					"patterns": [
+						{
+							"begin": "\\(",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.section.try.resources.begin.bracket.round.otne"
+								}
+							},
+							"end": "\\)",
+							"endCaptures": {
+								"0": {
+									"name": "punctuation.section.try.resources.end.bracket.round.otne"
+								}
+							},
+							"name": "meta.try.resources.otne",
+							"patterns": [
+								{
+									"include": "#code"
+								}
+							]
+						},
+						{
+							"begin": "{",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.section.try.begin.bracket.curly.otne"
+								}
+							},
+							"end": "(?=})",
+							"contentName": "meta.try.body.otne",
+							"patterns": [
+								{
+									"include": "#code"
+								}
+							]
+						}
+					]
+				},
+				{
+					"begin": "\\b(catch)\\b",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control.catch.otne"
+						}
+					},
+					"end": "}",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.section.catch.end.bracket.curly.otne"
+						}
+					},
+					"name": "meta.catch.otne",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"begin": "\\(",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.definition.parameters.begin.bracket.round.otne"
+								}
+							},
+							"end": "\\)",
+							"endCaptures": {
+								"0": {
+									"name": "punctuation.definition.parameters.end.bracket.round.otne"
+								}
+							},
+							"contentName": "meta.catch.parameters.otne",
+							"patterns": [
+								{
+									"include": "#comments"
+								},
+								{
+									"include": "#storage-modifiers"
+								},
+								{
+									"begin": "[a-zA-Z$_][\\.a-zA-Z0-9$_]*",
+									"beginCaptures": {
+										"0": {
+											"name": "storage.type.otne"
+										}
+									},
+									"end": "(\\|)|(?=\\))",
+									"endCaptures": {
+										"1": {
+											"name": "punctuation.catch.separator.otne"
+										}
+									},
+									"patterns": [
+										{
+											"include": "#comments"
+										},
+										{
+											"match": "\\w+",
+											"captures": {
+												"0": {
+													"name": "variable.parameter.otne"
+												}
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"begin": "{",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.section.catch.begin.bracket.curly.otne"
+								}
+							},
+							"end": "(?=})",
+							"contentName": "meta.catch.body.otne",
+							"patterns": [
+								{
+									"include": "#code"
+								}
+							]
+						}
+					]
+				},
+				{
+					"begin": "\\bfinally\\b",
+					"beginCaptures": {
+						"0": {
+							"name": "keyword.control.finally.otne"
+						}
+					},
+					"end": "}",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.section.finally.end.bracket.curly.otne"
+						}
+					},
+					"name": "meta.finally.otne",
+					"patterns": [
+						{
+							"begin": "{",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.section.finally.begin.bracket.curly.otne"
+								}
+							},
+							"end": "(?=})",
+							"contentName": "meta.finally.body.otne",
+							"patterns": [
+								{
+									"include": "#code"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		"variables": {
+			"begin": "(?x)\n(?=\n  \\b\n  (\n    (func|bool|byte|short|num|string)\n    |\n    (?>(\\w+\\.)*[A-Z_]+\\w*) # e.g. \n  )\n  \\b\n  \\s*\n  (\n    <[\\w<>,\\.?\\s\\[\\]]*> # e.g.\n  )?\n  \\s*\n  (\n    (\\[\\])* # num[][]\n  )?\n  \\s+\n  [A-Za-z_$][\\w$]* # At least one identifier after space\n  ([\\w\\[\\],$][\\w\\[\\],\\s]*)? # possibly primitive array or additional identifiers\n  \\s*(=|:|;)\n)",
+			"end": "(?=\\=|:|;)",
+			"name": "meta.definition.variable.otne",
+			"patterns": [
+				{
+					"match": "([A-Za-z$_][\\w$]*)(?=\\s*(\\[\\])*\\s*(;|:|=|,))",
+					"captures": {
+						"1": {
+							"name": "variable.other.definition.otne"
+						}
+					}
+				},
+				{
+					"include": "#all-types"
+				},
+				{
+					"include": "#code"
+				}
+			]
+		},
+		"variables-local": {
+			"begin": "(?=\\b(var)\\b\\s+[A-Za-z_$][\\w$]*\\s*(=|:|;))",
+			"end": "(?=\\=|:|;)",
+			"name": "meta.definition.variable.local.otne",
+			"patterns": [
+				{
+					"match": "\\bvar\\b",
+					"name": "storage.type.local.otne"
+				},
+				{
+					"match": "([A-Za-z$_][\\w$]*)(?=\\s*(\\[\\])*\\s*(=|:|;))",
+					"captures": {
+						"1": {
+							"name": "variable.other.definition.otne"
+						}
+					}
+				},
+				{
+					"include": "#code"
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,48 @@
+{
+	"name": "otne",
+	"displayName": "Otne",
+	"description": "Otne Language",
+	"version": "0.0.2",
+	"icon": "otne.png",
+	"author": "beanflame",
+	"publisher": "uxnt",
+	"engines": {
+		"vscode": "^1.63.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"repository": {
+		"url": "https://github.com/uxnt"
+	},
+	"contributes": {
+		"languages": [
+			{
+				"id": "otne",
+				"aliases": [
+					"Otne",
+					"otne"
+				],
+				"extensions": [
+					".otne"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "otne",
+				"scopeName": "source.otne",
+				"path": "./syntaxes/otne.tmLanguage.json"
+			}
+		]
+	},
+	"__metadata": {
+		"id": "32b6b50e-e778-4bf3-a792-b1bcad699e74",
+		"publisherId": "90414842-74b7-4d0a-9a04-b47ec3733b0a",
+		"publisherDisplayName": "uxnt",
+		"isPreReleaseVersion": false,
+		"preRelease": false,
+		"installedTimestamp": 1647494627855
+	}
+}
