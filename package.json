@@ -10,7 +10,8 @@
 		"vscode": "^1.63.0"
 	},
 	"categories": [
-		"Programming Languages"
+		"Programming Languages",
+		"otne"
 	],
 	"repository": {
 		"url": "https://github.com/uxnt/vscode-otne"
