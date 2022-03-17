@@ -2,8 +2,8 @@
 	"name": "otne",
 	"displayName": "Otne",
 	"description": "Otne Language",
-	"version": "0.0.2",
-	"icon": "otne.png",
+	"version": "0.0.3",
+	"icon": "otne.svg",
 	"author": "beanflame",
 	"publisher": "uxnt",
 	"engines": {
